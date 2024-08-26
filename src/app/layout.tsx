@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,7 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <main className="py-24 max-w-[1224px] m-auto">{children}</main>
+        <main className="py-24 max-w-[1224px] min-h-screen m-auto">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
