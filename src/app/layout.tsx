@@ -20,9 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <main className="py-24 max-w-[1224px] min-h-screen m-auto">
-          {children}
-        </main>
+        <main className="max-w-[1224px] min-h-screen m-auto">{children}</main>
         <Footer />
       </body>
     </html>
