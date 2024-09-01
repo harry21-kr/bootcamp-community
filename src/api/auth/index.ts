@@ -5,7 +5,5 @@ export const getUserData = async () => {
 
   const { data, error } = await supabase.auth.getUser();
 
-  if (error) throw new Error(error.message);
-
   return data;
 };
