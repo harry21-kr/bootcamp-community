@@ -2,7 +2,7 @@ import { PostList } from "@/components/Post";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="py-24">
       <PostList />
     </div>
   );
