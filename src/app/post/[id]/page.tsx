@@ -1,19 +1,26 @@
-"use client";
+import { getPostById } from "@/api/post";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import Post from "../_components/Post";
 
-import { useEffect } from "react";
-
-const PostPage = ({ params }: { params: { id: string } }) => {
+const PostPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`/api/post/${id}`);
-      const post = await res.json();
-      console.log(post);
-    })();
-  }, [id]);
+  const queryClient = new QueryClient();
 
-  return <div>{id}</div>;
+  await queryClient.prefetchQuery({
+    queryKey: ["post"],
+    queryFn: async () => await getPostById(id),
+  });
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Post id={id} />
+    </HydrationBoundary>
+  );
 };
 
 export default PostPage;
