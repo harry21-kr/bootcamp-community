@@ -9,11 +9,13 @@ import Post from "../_components/Post";
 const PostPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
+  const post = await getPostById(id);
+
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: ["post"],
-    queryFn: async () => await getPostById(id),
+    initialData: post,
   });
 
   return (
