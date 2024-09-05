@@ -2,23 +2,25 @@
 
 import { getPostById } from "@/api/post";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 interface PostProps {
   id: string;
 }
 
 const Post = ({ id }: PostProps) => {
-  const { data } = useQuery({
+  const { data: post } = useQuery({
     queryKey: ["post"],
     queryFn: async () => await getPostById(id),
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const { post_content, post_title } = post![0];
 
-  return <div>Post</div>;
+  return (
+    <div>
+      <h2 className="text-3xl font-bold">{post_title}</h2>
+      <p>{post_content}</p>
+    </div>
+  );
 };
 
 export default Post;
