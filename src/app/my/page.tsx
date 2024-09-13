@@ -1,25 +1,15 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import { logout } from "./actions";
 
 const MyPage = () => {
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    const res = await fetch("/api/auth/logout");
-    const data = await res.json();
-    if (data.status === 200) router.push("/");
-  };
-
   return (
-    <div>
+    <form>
       <button
-        onClick={handleLogout}
+        formAction={logout}
         className="bg-black px-4 py-2 text-white font-bold"
       >
         로그아웃
       </button>
-    </div>
+    </form>
   );
 };
 
